@@ -39,11 +39,23 @@ describe('<App /> integration', () => {
     AppWrapper.unmount();
   });
 
+  test('update List of events after user changes number of events', () => {
+    const AppWrapper = mount(<App />);
+    AppWrapper.instance().updateNumberOfEvents = jest.fn();
+    AppWrapper.instance().forceUpdate();
+    const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
+    NumberOfEventsWrapper.instance().handleInputChanged({ target: { value: 1 } });
+    expect(AppWrapper.instance().updateNumberOfEvents).toHaveBeenCalledTimes(1);
+    expect(AppWrapper.instance().updateNumberOfEvents).toHaveBeenCalledWith('', '', 1);
+    AppWrapper.unmount();
+  });
+
   test('change state after get list of events', async () => {
     const AppWrapper = shallow(<App />);
     AppWrapper.instance().updateEvents(1.1, 1.2);
     await AppWrapper.update();
     expect(AppWrapper.state('events')).toEqual(mockEvents.events);
+    AppWrapper.unmount();
   });
 
   test('render correct list of events', () => {

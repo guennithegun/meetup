@@ -100,7 +100,6 @@ describe('<Event /> component', () => {
         member_pay_fee: false
       }
     });
-    console.log(EventWrapper.state('event'));
     expect(EventWrapper.state('event').name).toBe('Microservices mit dem MicroProfile 3.x');
   });
 });
