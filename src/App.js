@@ -5,7 +5,6 @@ import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { getEvents } from './api';
-import { getNewListOfEvents } from './api'
 
 class App extends Component {
 
@@ -15,17 +14,22 @@ class App extends Component {
 
   state = {
     events: [],
+    page: null,
     defaultCity: '',
-    lat: '',
-    lon: ''
+    lat: null,
+    lon: null
   }
 
-  updateEvents = (lat, lon) => {
-    getEvents(lat, lon).then(response => this.setState({ events: response.events, numberOfEvents: response.events.length, lat: response.city.lat, lon: response.city.lon }));
-  }
-
-  updateNumberOfEvents = (lat, lon, page) => {
-    getNewListOfEvents(lat, lon, page).then(response => this.setState({ events: response.events }));
+  updateEvents = (lat, lon, page) => {
+    if(lat && lon) {
+      getEvents(lat, lon, this.state.page).then(response => this.setState({ events: response.events, lat: response.city.lat, lon: response.city.lon }));
+    }
+    else if (page) {
+      getEvents(this.state.lat, this.state.lon, page).then(response => this.setState({ events: response.events, page: page }));
+    }
+    else {
+      getEvents(this.state.lat, this.state.lon, this.state.page).then(response => this.setState({ events: response.events }));
+    }
   }
 
   render() {
@@ -33,7 +37,7 @@ class App extends Component {
       <div className="App">
         <CitySearch updateEvents={this.updateEvents} defaultCity={this.state.defaultCity} />
         <EventList events={this.state.events} />
-        <NumberOfEvents updateNumberOfEvents={this.updateNumberOfEvents} numberOfEvents={this.state.events.length} lat={this.state.lat} lon={this.state.lon} />
+        <NumberOfEvents updateEvents={this.updateEvents} numberOfEvents={this.state.events.length} lat={this.state.lat} lon={this.state.lon} />
       </div>
     );
   }
