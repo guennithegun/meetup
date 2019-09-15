@@ -26,7 +26,7 @@ class CitySearch extends Component {
           className="city"
           value={this.state.query}
           onChange={this.handleInputChanged}
-          placeholder={this.props.defaultCity}
+          placeholder="Your City of Choice"
         />
 
         <ul className="suggestions">
