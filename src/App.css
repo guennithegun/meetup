@@ -1,10 +1,23 @@
+body, html {
+  width: 100%;
+  height: 100%;
+}
+
 .App {
   text-align: center;
-  padding: 2% 5%;
+  color: #333333;
 }
 
 .App * {
   box-sizing: border-box;
+}
+
+h1 {
+  font-size: 4em;
+}
+
+h2 {
+  margin: 0;
 }
 
 ul {
@@ -18,13 +31,23 @@ p {
 
 input[type="text"], input[type="number"] {
   padding: 8px 6px 8px 10px;
-  border-radius: 4px;
+  border-radius: 19px;
   outline: none;
-  border: 1px solid #ccc;
+  border: 1px solid #f6405f;
   font-size: 14px;
   line-height: 20px;
   align-self: center;
   height: 38px;
+  text-align: center;
+}
+
+.headLine {
+  width: 100%;
+  color: #f6405f;
+}
+
+.headLine span {
+  font-size: 10px;
 }
 
 .city {
@@ -34,6 +57,7 @@ input[type="text"], input[type="number"] {
 .CitySearch {
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
 }
 
 .suggestions {
@@ -50,23 +74,49 @@ input[type="text"], input[type="number"] {
   cursor: default;
 }
 
-.suggestions > li:last-child {
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
+.suggestions > li:first-child {
+  border-top-left-radius: 19px;
+  border-top-right-radius: 19px;
 }
 
+.suggestions > li:last-child {
+  border-bottom-left-radius: 19px;
+  border-bottom-right-radius: 19px;
+}
 
 .suggestions > li:hover {
   background-color: #BCDCDB;
 }
 
 .event {
+  min-height: 200px;
   padding: 10px 10px 20px;
-  margin-bottom: 10px;
+  margin: 20px auto;
   text-align: left;
-  border: 1px solid #ccc;
-  border-radius: 4px;
   position: relative;
+  background-color: white;
+  box-shadow: 0 0.313rem 0.625rem 0 rgba(0,0,0,.12);
+  border-radius: 3px;
+  max-width: 800px;
+  color: rgba(1, 69, 93, 1);
+}
+
+.event__Overview--data {
+  display: flex;
+  flex-direction: row;
+}
+
+.event__Details {
+  margin-bottom: 40px;
+}
+
+.event__Details a {
+  text-decoration: none;
+  color: #f6405f;
+}
+
+.event__Details h4 {
+  text-align: right;
 }
 
 .details-btn {
@@ -74,9 +124,17 @@ input[type="text"], input[type="number"] {
   right: 5px;
   bottom: 5px;
   padding: 5px 8px;
-  border-radius: 4px;
+  font-size: 14px;
+  border-radius: 3px;
+  letter-spacing: 2px;
+  height: 40px;
+  border: none;
   outline: none;
+  outline-style: none;
   cursor: pointer;
+  background-image: linear-gradient(30deg,#00abba,#51d0b9);
+  background-repeat: repeat-x;
+  color: white;
 }
 
 .name {
@@ -98,7 +156,28 @@ input[type="text"], input[type="number"] {
 }
 
 .numberOfEvents {
-  width: 80px;
-  margin: 20px 0 50px;
-  text-align: right;
+  width: 100%;
+  margin: 20px 0 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.alert {
+  height: 40px;
+  font-size: 12px;
+}
+
+.chartWrapper {
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+.event .recharts-responsive-container {
+  margin-bottom: 40px;
+}
+
+@media only screen and (min-width: 500px) {
+  .event .recharts-responsive-container {
+    margin-bottom: 0;
+  }
 }
